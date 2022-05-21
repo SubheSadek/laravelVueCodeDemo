@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateChallengSubcategoriesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('challeng_subcategories', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('information_id')->references('id')->on('information')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('challenge_category_id')->references('id')->on('challenge_categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('subcategory_id');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('challeng_subcategories');
+    }
+}
